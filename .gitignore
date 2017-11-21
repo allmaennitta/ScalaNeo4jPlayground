@@ -1,0 +1,10 @@
+# Created by .ignore support plugin (hsz.mobi)
+### Scala template
+# sbt specific
+**/target/
+# Scala-IDE specific
+.idea/
+project/project/
+
+*.stackdump
+/docker/data
