@@ -29,6 +29,13 @@ class NodeController {
       JavaConverters.mapAsJavaMap(HashMap("nodes" -> nodeRepository.findAll()))
     nodes
   }
+  @RequestMapping(value = Array("/node/{name}"), method = Array(RequestMethod.GET))
+  def getNode(@PathVariable("name")  name: String): Node = {
+    nodeRepository.findByName(name)
+  }
+
+  @RequestMapping(value = Array("/node/create"), method = Array(RequestMethod.POST))
+  def create(@RequestBody  input: Node): Node = {
+    nodeRepository.save(input)
+  }
 }
-
-

@@ -27,9 +27,10 @@ libraryDependencies ++= Seq(
   //  "com.typesafe.akka" %% "akka-actor" % vAkka,
   //  "com.typesafe.akka" %% "akka-testkit" % vAkka % "test",
 
-  //SPRING-BOOT, https://github.com/spring-projects/spring-boot/tree/master/spring-boot-starters
+  //WEB
   "org.springframework.boot" % "spring-boot-starter-web" % vSpringBoot,
   "org.springframework.boot" % "spring-boot-starter-tomcat" % vSpringBoot,
+  "javax.servlet" % "javax.servlet-api" % "3.1.0" % "provided",
 
   //JACKSON FOR YAML
   "com.fasterxml.jackson.core" % "jackson-core" % vJackson,
@@ -38,11 +39,12 @@ libraryDependencies ++= Seq(
   "com.fasterxml.jackson.dataformat" % "jackson-dataformat-yaml" % vJackson,
 
   //DATA
-  "org.hsqldb" % "hsqldb" % "2.3.1",
-//  "org.hibernate" % "hibernate-validator" % "5.3.5.Final",
-  "org.springframework.boot" % "spring-boot-starter-data-jpa" % vSpringBoot,
   "org.springframework.boot" % "spring-boot-starter-data-neo4j" % vSpringBoot,
-  "javax.servlet" % "javax.servlet-api" % "3.1.0" % "provided",
+//  "org.hsqldb" % "hsqldb" % "2.3.1",
+//  "org.hibernate" % "hibernate-validator" % "5.3.5.Final",
+//  "org.springframework.boot" % "spring-boot-starter-data-jpa" % vSpringBoot,
+
+
 
   //COMMON UTILS
   "ch.qos.logback" % "logback-classic" % "1.1.11",

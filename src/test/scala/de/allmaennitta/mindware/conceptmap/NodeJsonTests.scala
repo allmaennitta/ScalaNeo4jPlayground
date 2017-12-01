@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.json.JsonTest
 import org.springframework.boot.test.json.{JacksonTester, JsonContent}
 import com.jayway.jsonpath.matchers.JsonPathMatchers._
+import de.allmaennitta.mindware.conceptmap.utils.SpringTestContextManager
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.CoreMatchers._
 
@@ -16,10 +17,9 @@ class NodeJsonTests extends FunSpec with Matchers with SpringTestContextManager 
 
   describe("A Node") {
     it("can be serialized") {
-      val details: Node = new Node()
-      details.setId(0L)
+      val details = new Node()
       details.setName("Amsel")
-      val jsonString: String = this.json.write(details).getJson
+      val jsonString = this.json.write(details).getJson
 
       println(jsonString)
       assertThat(jsonString, isJson)
@@ -27,10 +27,10 @@ class NodeJsonTests extends FunSpec with Matchers with SpringTestContextManager 
     }
 
     it("can be deserialized") {
-      val content = "{\"id\": 99,\"name\":\"Ursula\"}"
-      val expectedNode: Node = new Node
-      expectedNode.setId(99L)
+      val content = "{\"name\":\"Ursula\"}"
+      val expectedNode = new Node()
       expectedNode.setName("Ursula")
+      assertThat(this.json.parse(content).getObject.name, equalTo("Ursula"))
       assertThat(this.json.parse(content).getObject.name, equalTo("Ursula"))
     }
   }

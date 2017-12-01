@@ -2,8 +2,6 @@ package de.allmaennitta.mindware.conceptmap
 import java.lang.Long
 import org.hibernate.validator.constraints.NotEmpty
 import org.neo4j.ogm.annotation.{GraphId, NodeEntity, Relationship}
-import org.springframework.data.annotation.Id
-import javax.persistence.GeneratedValue
 
 import scala.beans.BeanProperty
 
@@ -13,10 +11,12 @@ import scala.beans.BeanProperty
   */
 @NodeEntity
 class Node {
+  def this(name:String){
+    this();
+    this.name = name
+  }
 
-  @Id
   @GraphId
-  @GeneratedValue
   @BeanProperty
   var id: Long = _
 
@@ -32,4 +32,19 @@ class Node {
   private var subtypes = null
 
 
+  override def toString = s"Node($id, $name)"
+
+  def canEqual(other: Any): Boolean = other.isInstanceOf[Node]
+
+  override def equals(other: Any): Boolean = other match {
+    case that: Node =>
+      (that canEqual this) &&
+        name == that.name
+    case _ => false
+  }
+
+  override def hashCode(): Int = {
+    val state = Seq()
+    state.map(_.hashCode()).foldLeft(0)((a, b) => 31 * a + b)
+  }
 }
