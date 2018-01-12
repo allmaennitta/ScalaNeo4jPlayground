@@ -18,8 +18,8 @@ val vJackson: String = "2.8.10"
 val vNeo4J: String = "4.2.8.RELEASE"
 
 resolvers ++= Seq(
-  "Local Maven Repository" at "file:///E:/Data/Develop/maven_repo/",
-  Resolver.url("neo4j", url("https://repo.spring.io/libs-release"))
+  "Local Maven Repository" at "file:///home/ingo/.m2/repository",
+  Resolver.url("spring_release", url("https://repo.spring.io/libs-release"))
 )
 
 libraryDependencies ++= Seq(
@@ -31,6 +31,7 @@ libraryDependencies ++= Seq(
   "org.springframework.boot" % "spring-boot-starter-web" % vSpringBoot,
   "org.springframework.boot" % "spring-boot-starter-tomcat" % vSpringBoot,
   "javax.servlet" % "javax.servlet-api" % "3.1.0" % "provided",
+  "org.springframework.hateoas" % "spring-hateoas" % "0.24.0.RELEASE",
 
   //JACKSON FOR YAML
   "com.fasterxml.jackson.core" % "jackson-core" % vJackson,

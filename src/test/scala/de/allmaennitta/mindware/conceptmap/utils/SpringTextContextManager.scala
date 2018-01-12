@@ -6,14 +6,13 @@ package de.allmaennitta.mindware.conceptmap.utils
   * https://github.com/duwamish-os/scalatest-springboot
   */
 
+import de.allmaennitta.mindware.conceptmap.node.NodeRepository
 import org.scalatest.{BeforeAndAfterAll, Suite}
 import org.springframework.context.ApplicationContext
 import org.springframework.core.annotation.{AnnotatedElementUtils, AnnotationAttributes}
 import org.springframework.test.annotation.DirtiesContext
 import org.springframework.test.context.support.DirtiesContextTestExecutionListener
 import org.springframework.test.context.{TestContext, TestContextManager}
-import de.allmaennitta.mindware.conceptmap.{Node, NodeRepository}
-import org.springframework.data.repository.CrudRepository
 import org.springframework.util.Assert
 
 trait SpringTestContextManager extends BeforeAndAfterAll {
@@ -30,8 +29,11 @@ trait SpringTestContextManager extends BeforeAndAfterAll {
     val ctx: ApplicationContext =
       springTestContextManager.getTestContext.getApplicationContext
 //      println(ctx.getBeanDefinitionNames.toList)
-      val rep: NodeRepository = ctx.getBean("nodeRepository").asInstanceOf[NodeRepository]
+    val repopsitoryBeanName = "nodeRepository"
+    if (ctx.containsBean(repopsitoryBeanName)){
+      val rep: NodeRepository = ctx.getBean(repopsitoryBeanName).asInstanceOf[NodeRepository]
       new DBInitializer(rep).init()
+    }
   }
 
   abstract override protected def afterAll(): Unit = {

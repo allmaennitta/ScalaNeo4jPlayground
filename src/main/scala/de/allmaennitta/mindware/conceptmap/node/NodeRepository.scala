@@ -1,9 +1,10 @@
-package de.allmaennitta.mindware.conceptmap
+package de.allmaennitta.mindware.conceptmap.node
+
+import java.lang.Long
+import java.util
 
 import org.springframework.data.neo4j.annotation.Query
 import org.springframework.data.neo4j.repository.Neo4jRepository
-import java.lang.Long
-import java.util
 
 trait NodeRepository extends Neo4jRepository[Node, Long] {
 

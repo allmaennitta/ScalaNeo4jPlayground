@@ -1,7 +1,6 @@
-package de.allmaennitta.mindware.conceptmap
+package de.allmaennitta.mindware.conceptmap.node
 
 import java.util
-import java.util.List
 
 import de.allmaennitta.mindware.conceptmap.utils.SpringTestContextManager
 import org.assertj.core.api.Assertions.assertThat

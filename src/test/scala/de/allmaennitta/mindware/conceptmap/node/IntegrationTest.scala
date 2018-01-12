@@ -1,4 +1,4 @@
-package de.allmaennitta.mindware.conceptmap
+package de.allmaennitta.mindware.conceptmap.node
 
 import com.jayway.jsonpath.JsonPath
 import de.allmaennitta.mindware.conceptmap.utils.SpringTestContextManager
@@ -6,7 +6,7 @@ import io.restassured.RestAssured
 import io.restassured.RestAssured.{given, when}
 import io.restassured.http.ContentType.JSON
 import org.assertj.core.api.Assertions.assertThat
-import org.scalatest.{FunSpec, Matchers}
+import org.scalatest.{BeforeAndAfter, FunSpec, Matchers}
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.context.embedded.LocalServerPort
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment
@@ -17,17 +17,21 @@ import org.springframework.boot.test.context.{SpringBootTest, TestConfiguration}
 //@RunWith(classOf[SpringRunner])
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @TestConfiguration
-class IntegrationTest extends FunSpec with Matchers with SpringTestContextManager {
+class IntegrationTest extends FunSpec with Matchers with SpringTestContextManager with
+  BeforeAndAfter {
   @LocalServerPort var port = 0
 
   @Autowired var rep: NodeRepository = _
 
-  describe("Call of base path"){
-    it("leads to redirect"){
-      RestAssured.port = port
+  before{
+    RestAssured.port = port
+  }
+
+  describe("A request"){
+    it("shows all nodes"){
       val json =
         when.
-          get("/").
+          get("/node/all").
         then.
           contentType(JSON).
           statusCode(200).
@@ -37,11 +41,11 @@ class IntegrationTest extends FunSpec with Matchers with SpringTestContextManage
       val result: java.util.List[String] = JsonPath.parse(json).read("$.nodes[*].name")
       assertThat(result.toArray).contains("Filozoa", "Holozoa")
     }
+
     it("reads by name"){
-      RestAssured.port = port
       val jsonNode =
         when.
-          get("/node/Chordata").
+          get("/node/byname/Chordata").
           then.
             contentType(JSON).
             statusCode(200)
@@ -51,7 +55,6 @@ class IntegrationTest extends FunSpec with Matchers with SpringTestContextManage
       assertThat(jsonNode.getName).isEqualTo("Chordata")
     }
     it("creates nodes"){
-      RestAssured.port = port
       val nodeCreated =
         given.
           contentType("application/json").

@@ -1,6 +1,6 @@
 package de.allmaennitta.mindware.conceptmap.utils
 
-import de.allmaennitta.mindware.conceptmap.Node
+import de.allmaennitta.mindware.conceptmap.node.Node
 import org.springframework.data.repository.CrudRepository
 
 class DBInitializer(var rep: CrudRepository[Node, java.lang.Long]) {

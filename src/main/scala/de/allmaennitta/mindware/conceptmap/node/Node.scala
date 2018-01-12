@@ -1,5 +1,7 @@
-package de.allmaennitta.mindware.conceptmap
+package de.allmaennitta.mindware.conceptmap.node
+
 import java.lang.Long
+
 import org.hibernate.validator.constraints.NotEmpty
 import org.neo4j.ogm.annotation.{GraphId, NodeEntity, Relationship}
 

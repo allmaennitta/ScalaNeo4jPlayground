@@ -1,7 +1,6 @@
-package de.allmaennitta.mindware.conceptmap
+package de.allmaennitta.mindware.conceptmap.node
 
 import java.util
-import java.util.List
 
 import com.jayway.jsonpath.JsonPath
 import de.allmaennitta.mindware.conceptmap.utils.SpringTestContextManager
@@ -14,8 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment
 import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.{get, post}
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers.{content, header,
-  jsonPath, status}
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers.{content, header, jsonPath, status}
 
 @SpringBootTest(webEnvironment = WebEnvironment.MOCK)
 @AutoConfigureMockMvc
@@ -46,7 +44,7 @@ class NodeControllerTests extends FunSpec with Matchers with SpringTestContextMa
 
     it("can retrieve a node by name") {
       this.mockMvc.
-        perform(get("/node/Opisthokonta").
+        perform(get("/node/byname/Opisthokonta").
           accept(MediaType.APPLICATION_JSON_UTF8)).
           andExpect(status.isOk).
           andExpect(content.contentType("application/json;charset=UTF-8")).

@@ -1,13 +1,13 @@
-package de.allmaennitta.mindware.conceptmap
+package de.allmaennitta.mindware.conceptmap.node
 
+import com.jayway.jsonpath.matchers.JsonPathMatchers._
+import de.allmaennitta.mindware.conceptmap.utils.SpringTestContextManager
+import org.hamcrest.CoreMatchers._
+import org.hamcrest.MatcherAssert.assertThat
 import org.scalatest.{FunSpec, Matchers}
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.json.JsonTest
-import org.springframework.boot.test.json.{JacksonTester, JsonContent}
-import com.jayway.jsonpath.matchers.JsonPathMatchers._
-import de.allmaennitta.mindware.conceptmap.utils.SpringTestContextManager
-import org.hamcrest.MatcherAssert.assertThat
-import org.hamcrest.CoreMatchers._
+import org.springframework.boot.test.json.JacksonTester
 
 
 @JsonTest
